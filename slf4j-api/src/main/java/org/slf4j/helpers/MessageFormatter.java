@@ -203,7 +203,7 @@ final public class MessageFormatter {
                     return new FormattingTuple(sbuf.toString(), argArray, throwable);
                 }
             } else {
-                if (isEscapedDelimeter(messagePattern, j)) {
+                if (isEscapedDelimiter(messagePattern, j)) {
                     if (!isDoubleEscaped(messagePattern, j)) {
                         l--; // DELIM_START was escaped, thus should not be incremented
                         sbuf.append(messagePattern, i, j - 1);
@@ -230,7 +230,7 @@ final public class MessageFormatter {
         return new FormattingTuple(sbuf.toString(), argArray, throwable);
     }
 
-    final static boolean isEscapedDelimeter(String messagePattern, int delimeterStartIndex) {
+    final static boolean isEscapedDelimiter(String messagePattern, int delimeterStartIndex) {
 
         if (delimeterStartIndex == 0) {
             return false;
