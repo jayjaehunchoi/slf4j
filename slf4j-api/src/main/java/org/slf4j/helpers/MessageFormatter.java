@@ -97,7 +97,6 @@ import java.util.Map;
  */
 final public class MessageFormatter {
     static final char DELIM_START = '{';
-    static final char DELIM_STOP = '}';
     static final String DELIM_STR = "{}";
     private static final char ESCAPE_CHAR = '\\';
 
