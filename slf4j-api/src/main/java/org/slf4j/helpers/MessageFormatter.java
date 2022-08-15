@@ -186,14 +186,12 @@ final public class MessageFormatter {
         }
 
         int i = 0;
-        int j;
         // use string builder for better multicore performance
         StringBuilder sbuf = new StringBuilder(messagePattern.length() + 50);
 
-        int L;
-        for (L = 0; L < argArray.length; L++) {
+        for (int l = 0; l < argArray.length; l++) {
 
-            j = messagePattern.indexOf(DELIM_STR, i);
+            int j = messagePattern.indexOf(DELIM_STR, i);
 
             if (j == -1) {
                 // no more variables
@@ -207,7 +205,7 @@ final public class MessageFormatter {
             } else {
                 if (isEscapedDelimeter(messagePattern, j)) {
                     if (!isDoubleEscaped(messagePattern, j)) {
-                        L--; // DELIM_START was escaped, thus should not be incremented
+                        l--; // DELIM_START was escaped, thus should not be incremented
                         sbuf.append(messagePattern, i, j - 1);
                         sbuf.append(DELIM_START);
                         i = j + 1;
@@ -216,13 +214,13 @@ final public class MessageFormatter {
                         // itself escaped: "abc x:\\{}"
                         // we have to consume one backward slash
                         sbuf.append(messagePattern, i, j - 1);
-                        deeplyAppendParameter(sbuf, argArray[L], new HashMap<>());
+                        deeplyAppendParameter(sbuf, argArray[l], new HashMap<>());
                         i = j + 2;
                     }
                 } else {
                     // normal case
                     sbuf.append(messagePattern, i, j);
-                    deeplyAppendParameter(sbuf, argArray[L], new HashMap<>());
+                    deeplyAppendParameter(sbuf, argArray[l], new HashMap<>());
                     i = j + 2;
                 }
             }
